@@ -1,3 +1,6 @@
 [submodule "ctbignum"]
 	path = ctbignum
 	url = https://github.com/colinrford/ctbignum
+[submodule "concepts"]
+	path = concepts
+	url = https://www.github.com/colinrford/concepts
