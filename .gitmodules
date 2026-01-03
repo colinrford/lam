@@ -4,3 +4,6 @@
 [submodule "concepts"]
 	path = concepts
 	url = https://www.github.com/colinrford/concepts
+[submodule "bitvector"]
+	path = bitvector
+	url = https://github.com/colinrford/bitvector
