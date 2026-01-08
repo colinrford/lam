@@ -3,11 +3,14 @@
 	url = https://github.com/colinrford/ctbignum
 [submodule "concepts"]
 	path = concepts
-	url = https://www.github.com/colinrford/concepts
+	url = https://github.com/colinrford/concepts
 [submodule "bitvector"]
 	path = bitvector
 	url = https://github.com/colinrford/bitvector
 
 [submodule "polynomial_nttp"]
 	path = polynomial_nttp
-	url = https://www.github.com/colinrford/polynomial_nttp
+	url = https://github.com/colinrford/polynomial_nttp
+[submodule "symbols"]
+	path = symbols
+	url = https://github.com/colinrford/symbols
