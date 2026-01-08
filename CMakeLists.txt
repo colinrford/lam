@@ -22,8 +22,10 @@ set(LAM_CTBIGNUM_BuildTests ON CACHE BOOL "" FORCE)
 
 add_subdirectory(concepts)
 add_subdirectory(ctbignum)
-add_subdirectory(polynomial_nttp)
 add_subdirectory(bitvector)
 
-# Build interop module (depends on all above)
+# Build interop module (depends on concepts, ctbignum, bitvector)
+# Must be before polynomial_nttp so its tests can link against lam::interop
 add_subdirectory(interop)
+
+add_subdirectory(polynomial_nttp)
