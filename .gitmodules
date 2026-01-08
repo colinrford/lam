@@ -7,3 +7,7 @@
 [submodule "bitvector"]
 	path = bitvector
 	url = https://github.com/colinrford/bitvector
+
+[submodule "polynomial_nttp"]
+	path = polynomial_nttp
+	url = https://www.github.com/colinrford/polynomial_nttp
