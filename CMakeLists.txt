@@ -16,11 +16,18 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 project(lam VERSION 0.1.260108 LANGUAGES CXX)
 
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
+  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
 # Build individual libraries in dependency order
 enable_testing()
 set(LAM_CTBIGNUM_BuildTests ON CACHE BOOL "" FORCE)
 
 add_subdirectory(concepts)
+add_subdirectory(symbols)
 add_subdirectory(ctbignum)
 add_subdirectory(bitvector)
 
