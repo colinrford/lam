@@ -14,3 +14,6 @@
 [submodule "symbols"]
 	path = symbols
 	url = https://github.com/colinrford/symbols
+[submodule "linearalgebra"]
+	path = linearalgebra
+	url = https://www.github.com/colinrford/linearalgebra
