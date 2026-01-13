@@ -7,6 +7,7 @@ Currently `lam` consists of a few modules:
 - [`lam.bitvector`](https://www.github.com/colinrford/bitvector)
 - [`lam.concepts`](https://www.github.com/colinrford/concepts)
 - [`lam.ctbignum`](https://www.github.com/colinrford/ctbignum)
+- [`lam.lebesgue`](https://www.github.com/colinrford/lebesgue)
 - [`lam.linearalgebra`](https://www.github.com/colinrford/linearalgebra)
 - [`lam.polynomial_nttp`](https://www.github.com/colinrford/polynomial_nttp)
 - [`lam.symbols`](https://www.github.com/colinrford/symbols)

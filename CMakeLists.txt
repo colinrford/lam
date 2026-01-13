@@ -14,7 +14,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_MODULE_STD ON)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
-project(lam VERSION 0.1.260108 LANGUAGES CXX)
+project(lam VERSION 0.1.260113 LANGUAGES CXX)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
@@ -30,9 +30,8 @@ add_subdirectory(concepts)
 add_subdirectory(symbols)
 add_subdirectory(ctbignum)
 add_subdirectory(bitvector)
+add_subdirectory(polynomial_nttp)
 
-# Build interop module (depends on concepts, ctbignum, bitvector)
+# Build interop module (depends on concepts, ctbignum, bitvector, polynomial_nttp)
 # Must be before polynomial_nttp so its tests can link against lam::interop
 add_subdirectory(interop)
-
-add_subdirectory(polynomial_nttp)
