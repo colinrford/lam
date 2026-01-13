@@ -17,3 +17,6 @@
 [submodule "linearalgebra"]
 	path = linearalgebra
 	url = https://www.github.com/colinrford/linearalgebra
+[submodule "lebesgue"]
+	path = lebesgue
+	url = http://www.github.com/colinrford/lebesgue

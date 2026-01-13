@@ -16,4 +16,8 @@ target_link_libraries(lam_interop
     lam::bitvector
 )
 
+set_target_properties(lam_interop PROPERTIES CXX_SCAN_FOR_MODULES ON)
+
 add_library(lam::interop ALIAS lam_interop)
+
+add_subdirectory(tests)
