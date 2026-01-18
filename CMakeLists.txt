@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.31.6)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 4.0.3)
   set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "d0edc3af-4c50-42ea-a356-e2862fe7a444")
@@ -23,6 +25,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Build individual libraries in dependency order
+option(LAM_USE_TBB "Enable TBB for parallel execution" ON)
+
 enable_testing()
 set(LAM_CTBIGNUM_BuildTests ON CACHE BOOL "" FORCE)
 
