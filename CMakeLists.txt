@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.31.6)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 4.0.3)
   set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "d0edc3af-4c50-42ea-a356-e2862fe7a444")
@@ -14,7 +16,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_MODULE_STD ON)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
-project(lam VERSION 0.1.260113 LANGUAGES CXX)
+project(lam VERSION 0.1.260118 LANGUAGES CXX)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
@@ -23,6 +25,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Build individual libraries in dependency order
+option(LAM_USE_TBB "Enable TBB for parallel execution" ON)
+
 enable_testing()
 set(LAM_CTBIGNUM_BuildTests ON CACHE BOOL "" FORCE)
 
@@ -31,7 +35,7 @@ add_subdirectory(symbols)
 add_subdirectory(ctbignum)
 add_subdirectory(bitvector)
 add_subdirectory(polynomial_nttp)
-
-# Build interop module (depends on concepts, ctbignum, bitvector, polynomial_nttp)
-# Must be before polynomial_nttp so its tests can link against lam::interop
+add_subdirectory(linearalgebra)
 add_subdirectory(interop)
+add_subdirectory(lebesgue)
+
