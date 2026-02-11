@@ -29,4 +29,6 @@ struct lam::polynomial::univariate::finite_field_traits<lam::cbn::ZqElement<T, P
           return a * b;
       }
   }
+  static constexpr K add(const K& a, const K& b) { return a + b; }
+  static constexpr K sub(const K& a, const K& b) { return a - b; }
 };
