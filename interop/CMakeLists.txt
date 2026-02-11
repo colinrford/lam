@@ -4,6 +4,7 @@ target_sources(lam_interop
   PUBLIC
     FILE_SET CXX_MODULES FILES
       src/lam-interop.cppm
+      src/lam-interop-extra.cppm
 )
 
 target_compile_features(lam_interop PUBLIC cxx_std_23)
@@ -21,3 +22,4 @@ set_target_properties(lam_interop PROPERTIES CXX_SCAN_FOR_MODULES ON)
 add_library(lam::interop ALIAS lam_interop)
 
 add_subdirectory(tests)
+add_subdirectory(examples)
