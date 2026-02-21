@@ -27,3 +27,17 @@ target_link_libraries(test_interop_ntt
 target_compile_features(test_interop_ntt PRIVATE cxx_std_23)
 set_target_properties(test_interop_ntt PROPERTIES CXX_SCAN_FOR_MODULES ON)
 add_test(NAME Interop_NTT COMMAND test_interop_ntt)
+
+add_executable(check_kyber_poly check_kyber_poly.cpp)
+target_link_libraries(check_kyber_poly 
+  PRIVATE
+    lam::interop
+    lam::concepts
+    lam::polynomial_nttp
+    lam::ctbignum
+)
+target_compile_features(check_kyber_poly PRIVATE cxx_std_23)
+set_target_properties(check_kyber_poly PROPERTIES CXX_SCAN_FOR_MODULES ON)
+
+
+
