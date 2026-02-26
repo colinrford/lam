@@ -1,43 +1,20 @@
-
 enable_testing()
 
-add_executable(test_interop_roots roots_finite_field.cpp)
+add_interop_test(test_interop_roots SOURCE roots_finite_field.cpp TEST_NAME Interop_Roots_Finite_Field)
+add_interop_test(test_interop_ntt SOURCE ntt_interop_test.cpp TEST_NAME Interop_NTT)
+add_interop_test(finite_field_traits_test SOURCE finite_field_traits_test.cpp TEST_NAME Interop_Finite_Field_Traits)
+add_interop_executable(check_kyber_poly SOURCE check_kyber_poly.cpp)
 
-target_link_libraries(test_interop_roots 
-  PRIVATE
-    lam::interop
-    lam::concepts
-    lam::polynomial_nttp
-    lam::ctbignum
-)
+add_interop_test(test_interop_lagrange SOURCE lagrange_test_finite_field.cpp TEST_NAME Interop_Lagrange)
+add_interop_test(test_interop_finite_field_extension SOURCE finite_field_extension_test.cpp TEST_NAME Interop_FiniteFieldExtension)
+add_interop_test(test_interop_berlekamp SOURCE berlekamp.cpp TEST_NAME Interop_Berlekamp)
 
-target_compile_features(test_interop_roots PRIVATE cxx_std_23)
-set_target_properties(test_interop_roots PROPERTIES CXX_SCAN_FOR_MODULES ON)
+add_interop_test(test_interop_ntt_properties SOURCE ntt_properties.cpp TEST_NAME Interop_NTT_Properties)
+target_compile_options(test_interop_ntt_properties PRIVATE -fconstexpr-steps=100000000)
 
-add_test(NAME Interop_Roots_Finite_Field COMMAND test_interop_roots)
+add_interop_test(test_interop_ntt_array_test SOURCE ntt_array_test.cpp TEST_NAME Interop_NTT_ArrayTest)
+add_interop_test(test_interop_ntt_constexpr_test SOURCE ntt_constexpr_test.cpp TEST_NAME Interop_NTT_ConstexprTest)
+add_interop_test(test_interop_poly_rem_finite_field SOURCE poly_rem_finite_field.cpp TEST_NAME Interop_PolyRemFiniteField)
 
-add_executable(test_interop_ntt ntt_interop_test.cpp)
-target_link_libraries(test_interop_ntt 
-  PRIVATE
-    lam::interop
-    lam::concepts
-    lam::polynomial_nttp
-    lam::ctbignum
-)
-target_compile_features(test_interop_ntt PRIVATE cxx_std_23)
-set_target_properties(test_interop_ntt PROPERTIES CXX_SCAN_FOR_MODULES ON)
-add_test(NAME Interop_NTT COMMAND test_interop_ntt)
-
-add_executable(check_kyber_poly check_kyber_poly.cpp)
-target_link_libraries(check_kyber_poly 
-  PRIVATE
-    lam::interop
-    lam::concepts
-    lam::polynomial_nttp
-    lam::ctbignum
-)
-target_compile_features(check_kyber_poly PRIVATE cxx_std_23)
-set_target_properties(check_kyber_poly PROPERTIES CXX_SCAN_FOR_MODULES ON)
-
-
-
+add_interop_test(test_interop_poly_inv SOURCE poly_inv.cpp TEST_NAME Interop_PolyInv)
+target_compile_options(test_interop_poly_inv PRIVATE -fconstexpr-steps=100000000)

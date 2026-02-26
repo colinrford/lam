@@ -1,5 +1,8 @@
 add_library(lam_interop)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(InteropHelpers)
+
 target_sources(lam_interop
   PUBLIC
     FILE_SET CXX_MODULES FILES
@@ -23,3 +26,4 @@ add_library(lam::interop ALIAS lam_interop)
 
 add_subdirectory(tests)
 add_subdirectory(examples)
+add_subdirectory(benchmarks)

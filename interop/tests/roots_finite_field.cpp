@@ -12,8 +12,8 @@ import lam.interop;
 
 using namespace lam::cbn;
 using namespace lam::cbn::literals;
-using lam::polynomial::univariate::polynomial_nttp;
 using lam::roots;
+using lam::polynomial::univariate::polynomial_nttp;
 
 // Helper to check if roots match expected values (order independent)
 template<typename Roots, typename Expected>
@@ -82,7 +82,7 @@ bool test_quadratic()
   constexpr GF minus_three(10_Z); // -3 = 10 mod 13
 
   polynomial_nttp<GF, 2> p{{minus_three, GF(0_Z), one}}; // x^2 - 3
-  
+
   // NOTE: This relies on ctbignum providing sqrt() -> std::optional
   auto r = roots(p);
 
@@ -90,7 +90,8 @@ bool test_quadratic()
   if (!check_roots(r, expected))
   {
     std::println("Quadratic GF(13) Failed. Found {} roots.", r.size());
-    for(auto root : r) std::println("  Found: {}", root.value);
+    for (auto root : r)
+      std::println("  Found: {}", root.value);
     return false;
   }
   std::println("Quadratic GF(13) Passed");
@@ -104,7 +105,7 @@ bool test_cubic()
   constexpr GF minus_one(6_Z);
 
   polynomial_nttp<GF, 3> p{{minus_one, GF(0_Z), GF(0_Z), one}}; // x^3 - 1
-  
+
   // Now this should automatically dispatch to roots_berlekamp!
   auto r = roots(p);
 
@@ -112,7 +113,8 @@ bool test_cubic()
   if (!check_roots(r, expected))
   {
     std::println("Cubic GF(7) Failed. Found {} roots.", r.size());
-    for(auto root : r) std::println("  Found: {}", root.value);
+    for (auto root : r)
+      std::println("  Found: {}", root.value);
     return false;
   }
   std::println("Cubic GF(7) Passed");
