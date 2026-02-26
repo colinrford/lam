@@ -1,25 +1,12 @@
+add_interop_executable(finite_field_roots)
+add_interop_executable(finite_field_stress_test)
 
-add_executable(finite_field_roots finite_field_roots.cpp)
+# ============================================================
+# Compatibility Examples
+# ============================================================
 
-target_link_libraries(finite_field_roots
-  PRIVATE
-    lam::interop
-    lam::polynomial_nttp
-    lam::ctbignum
-)
+add_interop_executable(ctbignum_compatibility SOURCE compatibility/ctbignum_compat.cpp)
+target_compile_options(ctbignum_compatibility PRIVATE -fconstexpr-steps=150000000 -fbracket-depth=1024)
 
-target_compile_features(finite_field_roots PRIVATE cxx_std_23)
-set_target_properties(finite_field_roots PROPERTIES CXX_SCAN_FOR_MODULES ON)
-
-# Stress Test
-add_executable(finite_field_stress_test finite_field_stress_test.cpp)
-
-target_link_libraries(finite_field_stress_test
-  PRIVATE
-    lam::interop
-    lam::polynomial_nttp
-    lam::ctbignum
-)
-
-target_compile_features(finite_field_stress_test PRIVATE cxx_std_23)
-set_target_properties(finite_field_stress_test PROPERTIES CXX_SCAN_FOR_MODULES ON)
+add_interop_executable(roots_brute_force SOURCE compatibility/roots_brute_force.cpp)
+add_interop_executable(root_finding_demo)

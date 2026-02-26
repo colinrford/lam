@@ -1,7 +1,7 @@
 /*
  *  ntt_interop_test.cpp
  *  Verifies that importing lam.interop correctly provides traits for ctbignum
- * compatibility.
+ *  compatibility.
  */
 
 import std;
@@ -17,7 +17,8 @@ using Field = decltype(lam::cbn::Zq(ntt_prime));
 
 using namespace lam::polynomial::univariate::ntt;
 
-int main() {
+int main()
+{
   std::println("Testing lam.interop integration...");
 
   std::vector<Field> data = {Field(1), Field(2), Field(3), Field(4)};
@@ -27,8 +28,10 @@ int main() {
   ntt_transform(data, false);
   ntt_transform(data, true);
 
-  for (std::size_t i = 0; i < 4; ++i) {
-    if (data[i] != original[i]) {
+  for (std::size_t i = 0; i < 4; ++i)
+  {
+    if (data[i] != original[i])
+    {
       std::println("Interop Round-Trip Failed!");
       return 1;
     }
@@ -56,11 +59,13 @@ int main() {
   auto product = a * b;
 
   // Expected: coefficient[2] = 1, coefficient[0] = -1 (P-1)
-  if (product.coefficients[2] != Field(1)) {
+  if (product.coefficients[2] != Field(1))
+  {
     std::println("Polynomial Mul Failed: x^2 coeff wrong");
     return 1;
   }
-  if (product.coefficients[0] != Field(4179340454199820288ULL)) {
+  if (product.coefficients[0] != Field(4179340454199820288ULL))
+  {
     std::println("Polynomial Mul Failed: constant coeff wrong");
     return 1;
   }
@@ -90,16 +95,19 @@ int main() {
 
   // Naive Multiplication (Reference)
   lam::polynomial::polynomial_nttp<Field, 2 * N> p_naive{};
-  for (std::size_t i = 0; i <= N; ++i) {
-    for (std::size_t j = 0; j <= N; ++j) {
-      p_naive.coefficients[i + j] = p_naive.coefficients[i + j] +
-                                    (p1.coefficients[i] * p2.coefficients[j]);
+  for (std::size_t i = 0; i <= N; ++i)
+  {
+    for (std::size_t j = 0; j <= N; ++j)
+    {
+      p_naive.coefficients[i + j] = p_naive.coefficients[i + j] + (p1.coefficients[i] * p2.coefficients[j]);
     }
   }
 
   // Verify
-  for (std::size_t i = 0; i <= 2 * N; ++i) {
-    if (p_ntt.coefficients[i] != p_naive.coefficients[i]) {
+  for (std::size_t i = 0; i <= 2 * N; ++i)
+  {
+    if (p_ntt.coefficients[i] != p_naive.coefficients[i])
+    {
       std::println("Stress Test Failed at index {}!", i);
       // std::println("Expected: {}", p_naive.coefficients[i]);
       // std::println("Got:      {}", p_ntt.coefficients[i]);
