@@ -10,3 +10,5 @@ target_compile_options(ctbignum_compatibility PRIVATE -fconstexpr-steps=15000000
 
 add_interop_executable(roots_brute_force SOURCE compatibility/roots_brute_force.cpp)
 add_interop_executable(root_finding_demo)
+
+add_interop_executable(bitvector_ctbignum_interop SOURCE compatibility/bitvector_ctbignum_interop.cpp)
