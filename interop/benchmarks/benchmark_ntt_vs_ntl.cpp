@@ -16,23 +16,21 @@ using field = lam::cbn::ZqElement<std::uint64_t, local_prime>;
 
 // Forward declarations of external C++ implementation
 extern "C++" void run_ntl_benchmark_impl(long N);
-extern "C++" void init_ntl_modulus_impl(const char* prime_str);
-extern "C++" bool verify_ntl_multiplication_impl(long N, const long* a_data, const long* b_data,
-                                                 const long* expected_data);
+extern "C++" void init_ntl_modulus_impl(const char *prime_str);
+extern "C++" bool verify_ntl_multiplication_impl(long N, const long *a_data,
+                                                 const long *b_data,
+                                                 const long *expected_data);
 
 // ... (existing includes and formatting) ...
 
-template<std::size_t N>
-void run_benchmark_local()
-{
+template <std::size_t N> void run_benchmark_local() {
   using poly = lam::polynomial::univariate::polynomial_nttp<field, N>;
   poly a, b;
   // Fill with some data
   // Use long for easy bridging to NTL
   std::vector<long> a_vec(N + 1), b_vec(N + 1);
 
-  for (std::size_t i = 0; i <= N; ++i)
-  {
+  for (std::size_t i = 0; i <= N; ++i) {
     a.coefficients[i] = field(i + 1);
     b.coefficients[i] = field(N - i);
     a_vec[i] = static_cast<long>(i + 1);
@@ -43,8 +41,7 @@ void run_benchmark_local()
   auto c = a * b;
 
   std::vector<long> res_vec(2 * N + 1);
-  for (std::size_t i = 0; i <= 2 * N; ++i)
-  {
+  for (std::size_t i = 0; i <= 2 * N; ++i) {
     // Handle potential indexing depending on result size type
     if (i < c.coefficients.size())
       res_vec[i] = static_cast<long>(c.coefficients[i].data[0]);
@@ -52,13 +49,11 @@ void run_benchmark_local()
       res_vec[i] = 0;
   }
 
-  bool match = verify_ntl_multiplication_impl(N, a_vec.data(), b_vec.data(), res_vec.data());
-  if (match)
-  {
+  bool match = verify_ntl_multiplication_impl(N, a_vec.data(), b_vec.data(),
+                                              res_vec.data());
+  if (match) {
     std::println("  [Correctness] Local result MATCHES NTL result.");
-  }
-  else
-  {
+  } else {
     std::println("  [Incorrect] Local result DOES NOT MATCH NTL result!");
     std::exit(1);
   }
@@ -66,20 +61,20 @@ void run_benchmark_local()
   // Performance Benchmark
   auto start = std::chrono::steady_clock::now();
   constexpr int iterations = 100;
-  for (int i = 0; i < iterations; ++i)
-  {
+  for (int i = 0; i < iterations; ++i) {
     auto res = a * b;
     lam::polynomial::is_negligible(res[0]); // Prevent optimize out
   }
   auto end = std::chrono::steady_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+  auto duration =
+      std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+          .count();
 
-  std::println("  Local (deg {}):     {:>8.2f} us", N, static_cast<double>(duration) / iterations);
+  std::println("  Local (deg {}):     {:>8.2f} us", N,
+               static_cast<double>(duration) / iterations);
 }
 
-
-int main()
-{
+int main() {
   std::println("Benchmarking NTT Multiplication: Local vs NTL");
 
   // Initialize NTL Modulus via wrapper (Solinas Prime)
