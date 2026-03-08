@@ -16,7 +16,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_MODULE_STD ON)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
-project(lam VERSION 0.1.260306 LANGUAGES CXX)
+project(lam VERSION 0.1.260308 LANGUAGES CXX)
+
+include(Sanitizers)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
